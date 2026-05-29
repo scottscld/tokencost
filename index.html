@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TokenCost.ai — AI Token Cost Calculator | Compare GPT, Claude, Gemini & More</title>
+<meta name="description" content="Free AI token cost calculator. Compare pricing across GPT-4o, Claude, Gemini, DeepSeek, Grok and 15+ models. Find out exactly what your AI project will cost before you build.">
+<meta name="keywords" content="AI token cost calculator, LLM pricing, GPT-4o cost, Claude pricing, Gemini token price, AI API cost, vibe coding cost, AI development budget">
+<meta property="og:title" content="TokenCost.ai — Know What Your AI Will Cost">
+<meta property="og:description" content="Free calculator to compare AI model token costs across all major providers. Built for vibe coders and developers.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourdomain.github.io/">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google AdSense — STEP 1: Replace ca-pub-XXXXXXXXXXXXXXXX with your Publisher ID -->
+<!-- STEP 2: Uncomment the line below once your site is approved -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#hero">TOKEN<span>COST</span></a>
+  <ul class="nav-links">
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#token-counter">Count Tokens</a></li>
+    <li><a href="#tips">Save Money</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge"><span class="dot"></span>15+ AI Models · Updated May 2026</div>
+  <h1>KNOW WHAT YOUR<br><em>AI WILL COST</em><br>BEFORE YOU BUILD</h1>
+  <p class="hero-sub">Stop guessing. Tell us what you want to build — we'll show you exactly what it costs across every major AI tool, in plain English.</p>
+  <div class="hero-cta">
+    <a href="#calculator" class="btn-primary">Calculate My Cost</a>
+    <a href="#examples" class="btn-ghost">What's a Token?</a>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num">15+</div><div class="stat-label">AI Models</div></div>
+    <div class="stat"><div class="stat-num">50×</div><div class="stat-label">Price Range</div></div>
+    <div class="stat"><div class="stat-num">FREE</div><div class="stat-label">Always</div></div>
+    <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Pricing Data</div></div>
+  </div>
+</section>
+
+<!-- TOKEN EXAMPLES -->
+<section id="examples">
+  <span class="section-label">Understand Tokens</span>
+  <h2>WHAT DOES 1,000 TOKENS LOOK LIKE?</h2>
+  <p class="section-desc">AI tools charge by the "token" — a token is roughly <strong>¾ of a word</strong>, or about 4 characters. Here are real-life examples so you can picture your own usage.</p>
+
+  <div class="examples-grid">
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-type">📱 Quick Question</div>
+        <span class="token-badge">~50 tokens</span>
+      </div>
+      <p class="example-preview">"Hey, can you help me fix this bug? The login button doesn't work on mobile Safari."</p>
+      <div class="example-meta">
+        <span class="meta-item">📝 ~38 words</span>
+        <span class="meta-item">💰 Costs less than $0.00001</span>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-type">📧 Short Task</div>
+        <span class="token-badge">~200 tokens</span>
+      </div>
+      <p class="example-preview">"Write a professional email to a client explaining a project delay. Give me 3 timeline options and keep it under 200 words."</p>
+      <div class="example-meta">
+        <span class="meta-item">📝 ~150 words</span>
+        <span class="meta-item">💰 ~$0.0005 on most AI tools</span>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-type">📄 Blog Post or Article</div>
+        <span class="token-badge">~1,000 tokens</span>
+      </div>
+      <p class="example-preview">"Write a 750-word blog post about productivity tips for remote workers, with an intro, 5 tips explained in detail, and a strong conclusion."</p>
+      <div class="example-meta">
+        <span class="meta-item">📝 ~750 words</span>
+        <span class="meta-item">💰 ~$0.01 on GPT-4o</span>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-type">💻 Reviewing Code</div>
+        <span class="token-badge">~2,500 tokens</span>
+      </div>
+      <p class="example-preview">"Review this 150-line app component for bugs, speed issues, and best practices. [paste code here]"</p>
+      <div class="example-meta">
+        <span class="meta-item">📝 ~1,800 words equivalent</span>
+        <span class="meta-item">💰 ~$0.006 on Gemini Flash</span>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-type">📚 Analyzing a Document</div>
+        <span class="token-badge">~10,000 tokens</span>
+      </div>
+      <p class="example-preview">"Here's a 40-page report. Summarize the key findings, pull out the top 10 recommendations, and flag any contradictions."</p>
+      <div class="example-meta">
+        <span class="meta-item">📝 ~7,500 words</span>
+        <span class="meta-item">💰 ~$0.025 on Claude Haiku</span>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-type">🚀 Building a Full App</div>
+        <span class="token-badge">~50,000 tokens</span>
+      </div>
+      <p class="example-preview">"Build a full app with user login, payments, a dashboard, and an API. Include all files, a README, and deployment instructions."</p>
+      <div class="example-meta">
+        <span class="meta-item">📝 Entire codebase</span>
+        <span class="meta-item">💰 ~$0.75 on Claude Opus</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AdSense Slot 1 — Leaderboard -->
+  <div class="ad-slot" id="ad-slot-1">
+    <!-- Replace this comment with your AdSense ad unit code -->
+    <!-- Example:
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    <span>Advertisement</span>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculator">
+  <span class="section-label">Cost Calculator</span>
+  <h2>WHAT WILL YOUR AI COST?</h2>
+  <p class="section-desc">Answer 3 simple questions about what you want to build. We'll handle the math and show you a full breakdown across every major AI tool.</p>
+
+  <div class="calc-wrapper">
+    <div class="calc-body">
+
+      <!-- Q1: Use Case -->
+      <div class="question-block">
+        <div class="q-num">01</div>
+        <div class="q-content">
+          <div class="q-title">What are you building or using AI for?</div>
+          <div class="q-hint">Pick the option that sounds most like your project</div>
+          <div class="use-case-grid" id="use-case-grid">
+            <button class="use-case-btn active" data-preset="chatbot" onclick="selectUseCase(this)">
+              <span class="uc-icon">💬</span>
+              <span class="uc-label">Chatbot or Q&amp;A</span>
+              <span class="uc-desc">Answer questions, customer support</span>
+            </button>
+            <button class="use-case-btn" data-preset="coding" onclick="selectUseCase(this)">
+              <span class="uc-icon">💻</span>
+              <span class="uc-label">Coding Assistant</span>
+              <span class="uc-desc">Write, review, or fix code</span>
+            </button>
+            <button class="use-case-btn" data-preset="content" onclick="selectUseCase(this)">
+              <span class="uc-icon">✍️</span>
+              <span class="uc-label">Writing &amp; Content</span>
+              <span class="uc-desc">Emails, blogs, social posts</span>
+            </button>
+            <button class="use-case-btn" data-preset="rag" onclick="selectUseCase(this)">
+              <span class="uc-icon">📄</span>
+              <span class="uc-label">Document Analysis</span>
+              <span class="uc-desc">Summarize or search documents</span>
+            </button>
+            <button class="use-case-btn" data-preset="agent" onclick="selectUseCase(this)">
+              <span class="uc-icon">🤖</span>
+              <span class="uc-label">AI Agent / Automation</span>
+              <span class="uc-desc">Multi-step tasks, workflows</span>
+            </button>
+            <button class="use-case-btn" data-preset="image" onclick="selectUseCase(this)">
+              <span class="uc-icon">🎨</span>
+              <span class="uc-label">Just Exploring</span>
+              <span class="uc-desc">Testing AI, learning the ropes</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2: How often -->
+      <div class="question-block">
+        <div class="q-num">02</div>
+        <div class="q-content">
+          <div class="q-title">How often will this be used per day?</div>
+          <div class="q-hint">Roughly how many times will someone send a message or request to your AI</div>
+          <div class="freq-grid">
+            <button class="freq-btn active" data-requests="10" onclick="selectFreq(this)">
+              <span class="freq-label">Just Me</span>
+              <span class="freq-num">~10/day</span>
+              <span class="freq-desc">Personal use</span>
+            </button>
+            <button class="freq-btn" data-requests="100" onclick="selectFreq(this)">
+              <span class="freq-label">Small Team</span>
+              <span class="freq-num">~100/day</span>
+              <span class="freq-desc">5–20 people</span>
+            </button>
+            <button class="freq-btn" data-requests="1000" onclick="selectFreq(this)">
+              <span class="freq-label">Growing App</span>
+              <span class="freq-num">~1,000/day</span>
+              <span class="freq-desc">Active users</span>
+            </button>
+            <button class="freq-btn" data-requests="10000" onclick="selectFreq(this)">
+              <span class="freq-label">Scaling Up</span>
+              <span class="freq-num">~10,000/day</span>
+              <span class="freq-desc">Lots of traffic</span>
+            </button>
+            <button class="freq-btn" data-requests="100000" onclick="selectFreq(this)">
+              <span class="freq-label">At Scale</span>
+              <span class="freq-num">~100,000/day</span>
+              <span class="freq-desc">High volume</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3: Response length -->
+      <div class="question-block">
+        <div class="q-num">03</div>
+        <div class="q-content">
+          <div class="q-title">How long are the AI's responses, typically?</div>
+          <div class="q-hint">Think about what you're asking the AI to produce each time</div>
+          <div class="length-grid">
+            <button class="length-btn active" data-output="100" onclick="selectLength(this)">
+              <span class="len-label">Short</span>
+              <span class="len-example">A few sentences — answering a question, classifying text, yes/no</span>
+            </button>
+            <button class="length-btn" data-output="400" onclick="selectLength(this)">
+              <span class="len-label">Medium</span>
+              <span class="len-example">A paragraph or two — emails, summaries, short explanations</span>
+            </button>
+            <button class="length-btn" data-output="1200" onclick="selectLength(this)">
+              <span class="len-label">Long</span>
+              <span class="len-example">A full page — blog posts, detailed reports, code functions</span>
+            </button>
+            <button class="length-btn" data-output="4000" onclick="selectLength(this)">
+              <span class="len-label">Very Long</span>
+              <span class="len-example">Multiple pages — full code files, entire documents, deep research</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="calc-cta">
+        <button class="btn-primary btn-large" onclick="showEmailModal()">
+          Show My Cost Breakdown →
+        </button>
+        <p class="calc-cta-note">Free. No credit card. Takes 5 seconds.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL MODAL -->
+<div class="modal-overlay" id="email-modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon">🔓</div>
+    <h3 class="modal-title">Unlock Your Full Cost Breakdown</h3>
+    <p class="modal-desc">Enter your email to see exactly what 15+ AI models will cost you — and get a monthly update when prices change.</p>
+    <div class="modal-field">
+      <input type="email" id="modal-email" placeholder="you@example.com" onkeydown="if(event.key==='Enter') submitModalEmail()">
+      <span class="modal-error" id="modal-error">Please enter a valid email address</span>
+    </div>
+    <button class="btn-primary btn-large modal-submit" onclick="submitModalEmail()">Show My Results →</button>
+    <p class="modal-fine">No spam, ever. One-time entry to unlock results.</p>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<section id="results-section" style="display:none;">
+  <span class="section-label">Your Cost Breakdown</span>
+  <h2>HERE'S WHAT YOU'LL PAY</h2>
+  <p class="section-desc">Based on your answers. Costs shown per month (30 days at your selected daily usage).</p>
+
+  <div class="results-summary">
+    <div class="result-card highlight">
+      <div class="result-value" id="res-daily">—</div>
+      <div class="result-label">Per Day</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value" id="res-monthly">—</div>
+      <div class="result-label">Per Month</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value" id="res-yearly">—</div>
+      <div class="result-label">Per Year</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value" id="res-tokens-day">—</div>
+      <div class="result-label">Tokens / Day</div>
+    </div>
+  </div>
+
+  <p class="results-note" id="results-model-note"></p>
+
+  <h3 class="compare-heading">COMPARE ACROSS ALL MODELS</h3>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.5rem;">Same usage, different AI tools. Sorted from cheapest to most expensive.</p>
+
+  <div class="table-scroll">
+    <table class="comparison-table" id="comparison-table">
+      <thead>
+        <tr>
+          <th>AI Model</th>
+          <th>Provider</th>
+          <th>Monthly Cost</th>
+          <th>Daily Cost</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="results-footnote">
+    * Based on your selections. Prices from official provider documentation as of May 2026. Output tokens typically cost 3–5× more than input tokens. <a href="#tips" style="color:var(--accent);">See tips to reduce costs ↓</a>
+  </div>
+
+  <!-- AdSense Slot 2 — Rectangle inside results -->
+  <div class="ad-slot" id="ad-slot-2" style="margin-top:2.5rem;">
+    <!-- Replace with your AdSense ad unit code -->
+    <span>Advertisement</span>
+  </div>
+</section>
+
+<!-- TOKEN COUNTER -->
+<section id="token-counter">
+  <span class="section-label">Token Estimator</span>
+  <h2>HOW MANY TOKENS IS MY TEXT?</h2>
+  <p class="section-desc">Paste anything — a prompt you're writing, a response you got from an AI, a document — and see exactly how many tokens it is and what it would cost.</p>
+
+  <div class="counter-wrapper">
+    <div class="counter-header">
+      <span style="font-size:0.85rem;color:var(--muted);">Try an example:</span>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.5rem;">
+        <button class="btn-ghost btn-sm" onclick="loadExample('short')">Short prompt</button>
+        <button class="btn-ghost btn-sm" onclick="loadExample('medium')">Medium prompt</button>
+        <button class="btn-ghost btn-sm" onclick="loadExample('long')">Long AI response</button>
+        <button class="btn-ghost btn-sm" onclick="clearCounter()">Clear</button>
+      </div>
+    </div>
+    <div class="counter-body">
+      <textarea id="token-input" placeholder="Paste your prompt or AI response here — we'll count the tokens instantly..." oninput="countTokens()"></textarea>
+      <div class="counter-stats">
+        <div class="counter-stat">
+          <div class="val" id="cnt-tokens">0</div>
+          <div class="lbl">Estimated Tokens</div>
+        </div>
+        <div class="counter-stat">
+          <div class="val" id="cnt-words">0</div>
+          <div class="lbl">Words</div>
+        </div>
+        <div class="counter-stat">
+          <div class="val" id="cnt-chars">0</div>
+          <div class="lbl">Characters</div>
+        </div>
+        <div class="counter-divider"></div>
+        <div class="counter-stat">
+          <div class="val" id="cnt-cost-cheap">$0.00</div>
+          <div class="lbl">Budget Model Cost<br><small>(e.g. Gemini Flash)</small></div>
+        </div>
+        <div class="counter-stat">
+          <div class="val" id="cnt-cost-mid">$0.00</div>
+          <div class="lbl">Mid-Tier Cost<br><small>(e.g. GPT-4o)</small></div>
+        </div>
+        <div class="counter-stat">
+          <div class="val" id="cnt-cost-premium">$0.00</div>
+          <div class="lbl">Premium Cost<br><small>(e.g. Claude Opus)</small></div>
+        </div>
+      </div>
+      <p class="counter-footnote">Estimate uses ~4 characters per token, which is standard for English. Actual counts vary slightly by model.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AdSense Slot 3 -->
+<div class="ad-wrapper">
+  <div class="ad-slot" id="ad-slot-3">
+    <span>Advertisement</span>
+  </div>
+</div>
+
+<!-- TIPS -->
+<section id="tips">
+  <span class="section-label">Reduce Your Bill</span>
+  <h2>10 WAYS TO CUT YOUR AI COSTS</h2>
+  <p class="section-desc">These techniques can slash your AI bill by 50–90% without sacrificing quality. No technical degree required.</p>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-num">01</div>
+      <div class="tip-title">Use a Cheaper Model for Simple Tasks</div>
+      <p class="tip-desc">Not every question needs the smartest (and priciest) AI. Use a budget model like Gemini Flash or GPT-4o Mini for basic questions — they're 10–50× cheaper and just as good for simple stuff.</p>
+      <div class="tip-saving">✓ Save 80–95% on simple tasks</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">02</div>
+      <div class="tip-title">Keep Your Instructions Short</div>
+      <p class="tip-desc">The instructions you give the AI (called a "system prompt") are charged every single time. Cut yours from 500 words to 100 words and you instantly slash a chunk of your bill.</p>
+      <div class="tip-saving">✓ Save up to 40% on inputs</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">03</div>
+      <div class="tip-title">Tell the AI How Long to Respond</div>
+      <p class="tip-desc">The AI's response is what costs the most. If you only need a 200-word answer, say so. "Reply in under 200 words" can cut your cost per message in half.</p>
+      <div class="tip-saving">✓ Save 50–70% on responses</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">04</div>
+      <div class="tip-title">Use Prompt Caching</div>
+      <p class="tip-desc">If you send the same instructions to the AI on every request, most providers will charge you 50–90% less after the first time. Ask your developer to enable "prompt caching."</p>
+      <div class="tip-saving">✓ Save 50–90% on repeated context</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">05</div>
+      <div class="tip-title">Summarize Long Conversations</div>
+      <p class="tip-desc">In a long chat, the AI re-reads the entire history every time. After a while, replace old messages with a short 3-sentence summary. Costs stay flat instead of growing forever.</p>
+      <div class="tip-saving">✓ Save 60–80% on long chats</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">06</div>
+      <div class="tip-title">Use Batch Processing</div>
+      <p class="tip-desc">If you don't need an instant answer — like running reports overnight or processing a large list — use "batch mode." OpenAI and Anthropic charge exactly 50% less for batch jobs.</p>
+      <div class="tip-saving">✓ Save exactly 50%</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">07</div>
+      <div class="tip-title">Ask for Just the Answer</div>
+      <p class="tip-desc">Saying "give me just the JSON, no explanation" instead of "explain your thinking then give me the JSON" removes a lot of unnecessary output tokens that you're paying for but don't need.</p>
+      <div class="tip-saving">✓ Save 30–60% on outputs</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">08</div>
+      <div class="tip-title">Cache Common Answers</div>
+      <p class="tip-desc">If lots of users ask the same questions, store the AI's answer and re-use it. No API call = zero cost. Even caching 20% of requests can dramatically reduce your monthly bill.</p>
+      <div class="tip-saving">✓ Save 100% on cached queries</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">09</div>
+      <div class="tip-title">Don't Stuff Entire Documents In</div>
+      <p class="tip-desc">Instead of pasting a 50-page document into every prompt, use a search tool to find only the 2–3 relevant paragraphs first, then send just those. It's called RAG, and it saves a fortune.</p>
+      <div class="tip-saving">✓ Save 70–90% on document tasks</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">10</div>
+      <div class="tip-title">Set a Spending Limit &amp; Watch It</div>
+      <p class="tip-desc">Every AI provider lets you set a monthly spending cap. Takes 2 minutes. One runaway prompt can cost 100× what you expect — a cap means you'll never wake up to a surprise bill.</p>
+      <div class="tip-saving">✓ Prevent runaway costs entirely</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TOKEN<span>COST</span></div>
+  <p class="footer-tagline">The free AI token cost calculator for builders, vibe coders, and curious humans.</p>
+  <div class="footer-links">
+    <a href="#calculator">Calculator</a>
+    <a href="#examples">Token Examples</a>
+    <a href="#token-counter">Count Tokens</a>
+    <a href="#tips">Cost Tips</a>
+  </div>
+  <p class="footer-copy">Prices sourced from official provider documentation updated May 2026. Prices change frequently — always verify with your provider. TokenCost.ai is not affiliated with any AI provider.</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/models.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
