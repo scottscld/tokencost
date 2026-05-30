@@ -15,7 +15,11 @@ function onCalcChange() {
   const answerText = document.getElementById('calc-answer').value;
 
   state.promptTokens = Math.round(promptText.length / 4);
-  state.answerTokens = Math.round(answerText.length / 4);
+  // Only update answerTokens from textarea if no chip is selected
+  const activeChip = document.querySelector('.answer-chip.active');
+  if (!activeChip) {
+    state.answerTokens = Math.round(answerText.length / 4);
+  }
 
   const pWords = promptText.trim() ? promptText.trim().split(/\s+/).length : 0;
   const aWords = answerText.trim() ? answerText.trim().split(/\s+/).length : 0;
@@ -38,12 +42,13 @@ function onCalcChange() {
 
   const btn  = document.getElementById('calc-btn');
   const note = document.getElementById('calc-cta-note');
-  const ready = modelName && (state.promptTokens > 0 || state.answerTokens > 0);
+  const hasAnswer = state.answerTokens > 0 || !!document.querySelector('.answer-chip.active');
+  const ready = !!modelName && (state.promptTokens > 0 || hasAnswer);
   btn.disabled = !ready;
 
   if (!modelName) {
     note.textContent = 'Select a model above to get started';
-  } else if (state.promptTokens === 0 && state.answerTokens === 0) {
+  } else if (state.promptTokens === 0 && !hasAnswer) {
     note.textContent = 'Enter your question or pick an answer length above';
   } else {
     const single = costCalcDirect(state.promptTokens, state.answerTokens, state.selectedModel);
