@@ -20,17 +20,429 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3450655454481883" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="css/style.css">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQMQ17XDPZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<style>/* ─── VARIABLES ─── */
+:root {
+  --bg: #080808;
+  --surface: #111111;
+  --surface2: #1a1a1a;
+  --border: #2a2a2a;
+  --accent: #e8ff00;
+  --accent2: #00d4ff;
+  --text: #f0f0f0;
+  --muted: #888;
+  --danger: #ff4545;
+  --success: #00e676;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --radius: 8px;
+}
 
-  gtag('config', 'G-DQMQ17XDPZ');
-</script>
-  
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 5vw; height: 64px;
+  background: rgba(8,8,8,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px; color: var(--accent); text-decoration: none; }
+.logo span { color: var(--text); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: var(--muted); font-size: 0.85rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-hamburger { display: none; background: none; border: none; color: var(--text); font-size: 1.4rem; cursor: pointer; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+@keyframes slideIn { from{opacity:0;transform:scale(.95) translateY(20px)} to{opacity:1;transform:none} }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 100px 5vw 60px;
+  position: relative;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,255,0,0.06) 0%, transparent 70%);
+}
+#hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: 6px 16px; font-size: 0.75rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2rem;
+  animation: fadeUp .6s ease both;
+}
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 0.95; letter-spacing: 2px;
+  animation: fadeUp .7s .1s ease both;
+}
+h1 em { color: var(--accent); font-style: normal; }
+.hero-sub { max-width: 580px; color: var(--muted); font-size: 1.1rem; margin: 1.5rem auto 0; animation: fadeUp .7s .2s ease both; }
+.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; animation: fadeUp .7s .3s ease both; }
+.stat-row {
+  display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+  margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border);
+  animation: fadeUp .7s .4s ease both; width: 100%; max-width: 800px;
+}
+.stat { text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: 2.5rem; color: var(--accent); letter-spacing: 2px; }
+.stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  background: var(--accent); color: #000; font-family: var(--font-body); font-weight: 600;
+  font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px;
+  border: none; border-radius: var(--radius); padding: 14px 36px; cursor: pointer;
+  text-decoration: none; transition: transform .15s, box-shadow .15s; display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,255,0,0.25); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-large { padding: 18px 48px; font-size: 1rem; border-radius: var(--radius); }
+.btn-ghost {
+  background: transparent; color: var(--text); font-family: var(--font-body); font-weight: 500;
+  font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px;
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 36px; cursor: pointer;
+  text-decoration: none; transition: border-color .15s; display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--muted); }
+.btn-sm { padding: 8px 16px; font-size: 0.8rem; letter-spacing: 1px; }
+
+/* ─── SECTIONS ─── */
+section { padding: 80px 5vw; }
+.section-label { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.75rem; display: block; }
+h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 1px; margin-bottom: 0.5rem; }
+.section-desc { color: var(--muted); max-width: 600px; margin-bottom: 3rem; }
+
+/* ─── EXAMPLES ─── */
+#examples { background: var(--surface); }
+.examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.example-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;
+  transition: border-color .2s, transform .2s;
+}
+.example-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.example-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.example-type { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.token-badge {
+  font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500;
+  background: rgba(232,255,0,0.1); color: var(--accent);
+  border: 1px solid rgba(232,255,0,0.2); border-radius: 4px; padding: 2px 10px; white-space: nowrap;
+}
+.example-preview {
+  font-size: 0.9rem; color: var(--muted); border-left: 2px solid var(--border);
+  padding-left: 1rem; margin-bottom: 1rem; font-style: italic; line-height: 1.5;
+}
+.example-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: #555; flex-wrap: wrap; }
+
+/* ─── CALCULATOR ─── */
+#calculator { background: var(--bg); }
+.calc-wrapper { max-width: 860px; }
+.question-block {
+  display: flex; gap: 2rem; margin-bottom: 3rem; padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.q-num {
+  font-family: var(--font-display); font-size: 3.5rem; color: rgba(232,255,0,0.15);
+  line-height: 1; min-width: 60px; padding-top: 4px;
+}
+.q-content { flex: 1; }
+.q-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.4rem; }
+.q-hint { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+/* Use case grid */
+.use-case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; }
+.use-case-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; cursor: pointer; text-align: left; transition: all .2s;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.use-case-btn:hover { border-color: var(--muted); }
+.use-case-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.05); }
+.uc-icon { font-size: 1.5rem; margin-bottom: 4px; }
+.uc-label { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+.uc-desc { font-size: 0.78rem; color: var(--muted); }
+
+/* Frequency grid */
+.freq-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
+.freq-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem 1.25rem; cursor: pointer; text-align: center; transition: all .2s;
+  flex: 1; min-width: 120px;
+}
+.freq-btn:hover { border-color: var(--muted); }
+.freq-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.05); }
+.freq-label { font-weight: 600; font-size: 0.9rem; color: var(--text); display: block; }
+.freq-num { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); display: block; margin: 3px 0; }
+.freq-desc { font-size: 0.78rem; color: var(--muted); display: block; }
+
+/* Length grid */
+.length-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+.length-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem 1.25rem; cursor: pointer; text-align: left; transition: all .2s;
+  display: flex; align-items: center; gap: 1.25rem;
+}
+.length-btn:hover { border-color: var(--muted); }
+.length-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.05); }
+.len-label { font-weight: 600; font-size: 0.9rem; min-width: 70px; color: var(--text); }
+.len-example { font-size: 0.85rem; color: var(--muted); }
+
+.calc-cta { text-align: center; padding: 1rem 0 0; }
+.calc-cta-note { font-size: 0.8rem; color: #555; margin-top: 0.75rem; }
+
+/* ─── EMAIL MODAL ─── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 2.5rem; max-width: 440px; width: 100%; text-align: center; position: relative;
+  animation: slideIn .3s ease both;
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem; background: none; border: none;
+  color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1;
+  transition: color .2s; padding: 4px 8px;
+}
+.modal-close:hover { color: var(--text); }
+.modal-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.modal-title { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 0.75rem; }
+.modal-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+.modal-field { margin-bottom: 1rem; text-align: left; }
+.modal-field input {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); font-family: var(--font-body); font-size: 1rem; padding: 14px 16px;
+  outline: none; transition: border-color .2s;
+}
+.modal-field input:focus { border-color: var(--accent); }
+.modal-field input.invalid { border-color: var(--danger); }
+.modal-error { color: var(--danger); font-size: 0.8rem; margin-top: 6px; display: none; }
+.modal-submit { width: 100%; justify-content: center; }
+.modal-fine { font-size: 0.75rem; color: #444; margin-top: 1rem; }
+
+/* ─── RESULTS ─── */
+#results-section { background: var(--surface); }
+.results-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.result-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.25rem; text-align: center;
+}
+.result-card.highlight { border-color: var(--accent); background: rgba(232,255,0,0.04); }
+.result-value { font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; color: var(--accent); }
+.result-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 4px; }
+.results-note { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; padding: 0.75rem 1rem; background: var(--surface2); border-radius: 6px; border-left: 3px solid var(--accent); }
+.compare-heading { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.table-scroll { overflow-x: auto; }
+.comparison-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 500px; }
+.comparison-table th {
+  text-align: left; padding: 10px 14px; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--muted); border-bottom: 1px solid var(--border);
+}
+.comparison-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+.comparison-table tr.best-value td { border-left: 2px solid var(--accent); }
+.model-name { font-weight: 500; }
+.provider-tag {
+  font-size: 0.7rem; border: 1px solid var(--border); border-radius: 3px;
+  padding: 1px 6px; color: var(--muted); margin-left: 6px;
+}
+.cost-cell { font-family: var(--font-mono); }
+.best-tag { font-size: 0.7rem; background: rgba(232,255,0,0.15); color: var(--accent); border-radius: 3px; padding: 2px 8px; font-weight: 600; }
+.pricey-tag { font-size: 0.7rem; color: var(--danger); }
+.results-footnote { font-size: 0.78rem; color: #444; margin-top: 1.5rem; line-height: 1.6; }
+
+/* ─── TOKEN COUNTER ─── */
+#token-counter { background: var(--bg); }
+.counter-wrapper { max-width: 860px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.counter-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+.counter-body { padding: 1.5rem; }
+textarea {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); font-family: var(--font-body); font-size: 0.9rem; padding: 14px;
+  resize: vertical; min-height: 160px; outline: none; transition: border-color .2s; line-height: 1.6;
+}
+textarea:focus { border-color: var(--accent2); }
+.counter-stats {
+  display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start;
+  margin-top: 1rem; padding: 1rem 1.25rem; background: var(--surface2); border-radius: 6px;
+}
+.counter-stat { text-align: center; min-width: 80px; }
+.counter-stat .val { font-family: var(--font-mono); font-size: 1.4rem; color: var(--accent2); }
+.counter-stat .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); line-height: 1.4; }
+.counter-stat small { font-size: 0.65rem; }
+.counter-divider { width: 1px; background: var(--border); align-self: stretch; margin: 0 0.5rem; }
+.counter-footnote { font-size: 0.78rem; color: #444; margin-top: 0.75rem; }
+
+/* ─── AD SLOT ─── */
+.ad-wrapper { padding: 0 5vw; }
+.ad-slot {
+  background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius);
+  padding: 1rem; text-align: center; color: #333; font-size: 0.8rem;
+  min-height: 90px; display: flex; align-items: center; justify-content: center;
+}
+
+/* ─── TIPS ─── */
+#tips { background: var(--surface); }
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.tip-card {
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;
+  transition: border-color .2s, transform .2s; background: var(--bg);
+}
+.tip-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.tip-num { font-family: var(--font-display); font-size: 3rem; color: rgba(232,255,0,0.12); line-height: 1; margin-bottom: 0.75rem; }
+.tip-title { font-weight: 600; margin-bottom: 0.5rem; }
+.tip-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+.tip-saving { margin-top: 1rem; font-size: 0.8rem; color: var(--success); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 3rem 5vw; text-align: center;
+}
+.footer-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; color: var(--accent); }
+.footer-logo span { color: var(--text); }
+.footer-tagline { color: var(--muted); font-size: 0.85rem; margin: 0.5rem 0 1.5rem; }
+.footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 0.75rem; color: #444; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem 1.5rem; font-size: 0.9rem; max-width: 320px;
+  transform: translateY(100px); opacity: 0; transition: all .3s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4); pointer-events: none;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-left: 3px solid var(--success); }
+.toast.error { border-left: 3px solid var(--danger); }
+
+/* ─── NEW CALCULATOR STYLES ─── */
+#calculator { background: var(--bg); }
+.calc-wrapper { max-width: 720px; display: flex; flex-direction: column; gap: 0; }
+
+.calc-step {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 0; padding: 1.75rem 2rem;
+  border-bottom: none;
+}
+.calc-step:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+.calc-step:last-of-type { border-radius: 0; }
+
+.calc-step-label {
+  font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 0.35rem;
+}
+.calc-step-hint { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+
+/* Model select */
+.calc-select-wrap { position: relative; }
+.calc-select-wrap::after {
+  content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--muted); pointer-events: none; font-size: 1rem;
+}
+#calc-model {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-body);
+  font-size: 0.95rem; padding: 13px 40px 13px 14px; outline: none;
+  transition: border-color .2s; cursor: pointer; -webkit-appearance: none;
+}
+#calc-model:focus { border-color: var(--accent); }
+#calc-model optgroup { color: var(--muted); font-size: 0.8rem; }
+#calc-model option { color: var(--text); background: var(--surface2); font-size: 0.95rem; }
+
+.model-price-badge {
+  margin-top: 0.75rem; display: inline-flex; align-items: center; gap: 1rem;
+  background: rgba(232,255,0,0.06); border: 1px solid rgba(232,255,0,0.2);
+  border-radius: 6px; padding: 8px 14px; font-size: 0.85rem;
+}
+.mpb-item { display: flex; flex-direction: column; }
+.mpb-val { font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem; font-weight: 500; }
+.mpb-lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.mpb-sep { color: var(--border); }
+
+/* Textareas */
+#calc-prompt, #calc-answer {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-body);
+  font-size: 0.95rem; padding: 13px 14px; outline: none; resize: vertical;
+  transition: border-color .2s; line-height: 1.6;
+}
+#calc-prompt:focus, #calc-answer:focus { border-color: var(--accent2); }
+
+.calc-prompt-stats {
+  margin-top: 6px; font-size: 0.8rem; color: #555;
+  font-family: var(--font-mono);
+}
+.calc-stat-sep { margin: 0 6px; }
+
+/* Answer chips */
+.answer-chips {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0.75rem 0;
+}
+.chip-label { font-size: 0.8rem; color: var(--muted); margin-right: 0.25rem; }
+.answer-chip {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 14px; cursor: pointer; transition: all .2s;
+  display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+  color: var(--text);
+}
+.answer-chip:hover { border-color: var(--muted); }
+.answer-chip.active { border-color: var(--accent); background: rgba(232,255,0,0.07); }
+.chip-tok { display: block; font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); margin-top: 2px; }
+.chip-eg { display: block; font-size: 0.73rem; color: var(--muted); margin-top: 1px; }
+
+/* CTA row at bottom */
+.calc-cta {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  padding: 1.5rem 2rem; text-align: center;
+}
+.calc-cta-note { font-size: 0.82rem; color: var(--muted); margin-top: 0.6rem; }
+
+#calc-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+#calc-btn:not(:disabled) { opacity: 1; }
+
+/* ─── MOBILE ─── */
+@media(max-width: 768px) {
+  nav { padding: 0 4vw; }
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 4vw; }
+  .nav-links.open { display: flex; }
+  .nav-hamburger { display: block; }
+  section { padding: 60px 4vw; }
+  .stat-row { gap: 1.5rem; }
+  .counter-stats { gap: 1rem; }
+  .counter-divider { display: none; }
+  .calc-step { padding: 1.25rem; }
+  .calc-cta { padding: 1.25rem; }
+  .answer-chips { gap: 0.5rem; }
+  .answer-chip { padding: 7px 10px; }
+}
+</style>
 </head>
 <body>
 
@@ -153,7 +565,7 @@
          data-ad-slot="1234567890"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script src="js/models.js"></script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     -->
     <span>Advertisement</span>
   </div>
@@ -477,78 +889,102 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script src="js/app.js"></script>
-<script>// app.js — TokenCost.ai main application logic
+<script>
+// ─── MODEL DATA ───────────────────────────────────────────────────────────────
+const MODELS = [
+  { name: "GPT-4o Mini",      provider: "OpenAI",           input: 0.15,  output: 0.60  },
+  { name: "Gemini 2.5 Flash", provider: "Google",           input: 0.15,  output: 0.60  },
+  { name: "Grok 4.1",         provider: "xAI",              input: 0.20,  output: 0.50  },
+  { name: "Mistral Small",    provider: "Mistral",          input: 0.10,  output: 0.30  },
+  { name: "DeepSeek V3.2",    provider: "DeepSeek",         input: 0.28,  output: 1.10  },
+  { name: "Llama 4 (API)",    provider: "Meta / 3rd party", input: 0.18,  output: 0.59  },
+  { name: "Gemini 3 Flash",   provider: "Google",           input: 0.50,  output: 3.00  },
+  { name: "DeepSeek R1",      provider: "DeepSeek",         input: 0.55,  output: 2.19  },
+  { name: "Claude Haiku 4.5", provider: "Anthropic",        input: 0.80,  output: 4.00  },
+  { name: "o4-mini",          provider: "OpenAI",           input: 1.10,  output: 4.40  },
+  { name: "Gemini 2.5 Pro",   provider: "Google",           input: 1.25,  output: 10.00 },
+  { name: "Gemini 3.1 Pro",   provider: "Google",           input: 2.00,  output: 12.00 },
+  { name: "Mistral Large",    provider: "Mistral",          input: 2.00,  output: 6.00  },
+  { name: "GPT-4o",           provider: "OpenAI",           input: 2.50,  output: 10.00 },
+  { name: "GPT-5.4",          provider: "OpenAI",           input: 2.50,  output: 15.00 },
+  { name: "Grok 3",           provider: "xAI",              input: 3.00,  output: 15.00 },
+  { name: "Claude Sonnet 4.6",provider: "Anthropic",        input: 3.00,  output: 15.00 },
+  { name: "Claude Opus 4.6",  provider: "Anthropic",        input: 15.00, output: 75.00 },
+];
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
+// ─── STATE ────────────────────────────────────────────────────────────────────
 const state = {
   selectedModel: null,
   promptTokens: 0,
   answerTokens: 0,
+  chipSelected: false,
   emailSubmitted: false,
 };
 
-// Google Sheets webhook
 const SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyRYucODMQokSM2J-wPMwIi6Y9QBbaeFRDSGBnDKtvt3rltgfLOGCjETMgMM0ko6C9SyA/exec';
 
-// ─── CALCULATOR INTERACTION ───────────────────────────────────────────────────
+// ─── CALCULATOR ───────────────────────────────────────────────────────────────
 function onCalcChange() {
-  const modelName = document.getElementById('calc-model').value;
+  const modelName  = document.getElementById('calc-model').value;
   const promptText = document.getElementById('calc-prompt').value;
   const answerText = document.getElementById('calc-answer').value;
 
-  // Token counts
+  // Update prompt tokens from textarea
   state.promptTokens = Math.round(promptText.length / 4);
-  state.answerTokens = Math.round(answerText.length / 4);
-
-  // Update token displays
   const pWords = promptText.trim() ? promptText.trim().split(/\s+/).length : 0;
-  const aWords = answerText.trim() ? answerText.trim().split(/\s+/).length : 0;
   document.getElementById('prompt-token-count').textContent = state.promptTokens.toLocaleString() + ' tokens';
   document.getElementById('prompt-word-count').textContent  = pWords.toLocaleString() + ' words';
-  document.getElementById('answer-token-count').textContent = state.answerTokens.toLocaleString() + ' tokens';
-  document.getElementById('answer-word-count').textContent  = aWords.toLocaleString() + ' words';
 
-  // Model price badge
+  // Only update answerTokens from textarea if no chip has been selected
+  if (!state.chipSelected) {
+    state.answerTokens = Math.round(answerText.length / 4);
+    const aWords = answerText.trim() ? answerText.trim().split(/\s+/).length : 0;
+    document.getElementById('answer-token-count').textContent = state.answerTokens.toLocaleString() + ' tokens';
+    document.getElementById('answer-word-count').textContent  = aWords.toLocaleString() + ' words';
+  }
+
+  // Update model
   if (modelName) {
-    state.selectedModel = MODELS.find(m => m.name === modelName);
+    state.selectedModel = MODELS.find(function(m){ return m.name === modelName; });
     if (state.selectedModel) {
       const badge = document.getElementById('model-price-badge');
       badge.style.display = 'inline-flex';
-      badge.innerHTML = `
-        <div class="mpb-item"><span class="mpb-val">$${state.selectedModel.input.toFixed(2)}</span><span class="mpb-lbl">per 1M input tokens</span></div>
-        <span class="mpb-sep">|</span>
-        <div class="mpb-item"><span class="mpb-val">$${state.selectedModel.output.toFixed(2)}</span><span class="mpb-lbl">per 1M output tokens</span></div>
-      `;
+      badge.innerHTML =
+        '<div class="mpb-item"><span class="mpb-val">$' + state.selectedModel.input.toFixed(2) + '</span><span class="mpb-lbl">per 1M input tokens</span></div>' +
+        '<span class="mpb-sep">|</span>' +
+        '<div class="mpb-item"><span class="mpb-val">$' + state.selectedModel.output.toFixed(2) + '</span><span class="mpb-lbl">per 1M output tokens</span></div>';
     }
   }
 
-  // Enable/disable calculate button
-  const btn = document.getElementById('calc-btn');
+  // Enable button when model selected AND some tokens exist
+  const btn  = document.getElementById('calc-btn');
   const note = document.getElementById('calc-cta-note');
-  const ready = modelName && (state.promptTokens > 0 || state.answerTokens > 0);
+  const ready = !!modelName && (state.promptTokens > 0 || state.answerTokens > 0);
   btn.disabled = !ready;
+
   if (!modelName) {
     note.textContent = 'Select a model above to get started';
-  } else if (state.promptTokens === 0 && state.answerTokens === 0) {
+  } else if (!ready) {
     note.textContent = 'Enter your question or pick an answer length above';
   } else {
-    const singleCost = costCalcDirect(state.promptTokens, state.answerTokens, state.selectedModel);
-    note.textContent = `This single exchange ≈ ${formatCost(singleCost)} · Free. No credit card.`;
+    const single = costCalc(state.promptTokens, state.answerTokens, state.selectedModel);
+    note.textContent = 'This single exchange \u2248 ' + formatCost(single) + ' \u00b7 Free. No credit card.';
   }
 }
 
-function setAnswerChip(btn) {
-  // Toggle active
-  document.querySelectorAll('.answer-chip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  state.answerTokens = parseInt(btn.dataset.tokens);
-
-  // Clear the textarea and update display
+function setAnswerChip(chipBtn) {
+  // Deactivate all chips, activate this one
+  document.querySelectorAll('.answer-chip').forEach(function(b){ b.classList.remove('active'); });
+  chipBtn.classList.add('active');
+  // Store tokens and mark chip as selected so onCalcChange won't overwrite
+  state.answerTokens = parseInt(chipBtn.dataset.tokens);
+  state.chipSelected = true;
+  // Clear textarea (optional paste area)
   document.getElementById('calc-answer').value = '';
+  // Update display
   document.getElementById('answer-token-count').textContent = state.answerTokens.toLocaleString() + ' tokens';
   document.getElementById('answer-word-count').textContent  = Math.round(state.answerTokens * 0.75).toLocaleString() + ' words (est.)';
-
+  // Now update button state
   onCalcChange();
 }
 
@@ -560,7 +996,7 @@ function showEmailModal() {
     return;
   }
   document.getElementById('email-modal').classList.add('open');
-  setTimeout(() => document.getElementById('modal-email').focus(), 100);
+  setTimeout(function(){ document.getElementById('modal-email').focus(); }, 100);
 }
 
 function closeModal() {
@@ -577,179 +1013,126 @@ function submitModalEmail() {
   const emailInput = document.getElementById('modal-email');
   const email = emailInput.value.trim();
   const errEl = document.getElementById('modal-error');
-
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errEl.style.display = 'block';
     emailInput.classList.add('invalid');
     emailInput.focus();
     return;
   }
-
   errEl.style.display = 'none';
   emailInput.classList.remove('invalid');
   logToSheets(email);
   state.emailSubmitted = true;
   closeModal();
   calculateAndShow();
-  setTimeout(() => document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' }), 150);
+  setTimeout(function(){ document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' }); }, 150);
   showToast('Results unlocked! Scroll down to see your breakdown.', 'success');
 }
 
-// ─── GOOGLE SHEETS LOGGING ────────────────────────────────────────────────────
+// ─── GOOGLE SHEETS ────────────────────────────────────────────────────────────
 function logToSheets(email) {
-  const payload = {
-    email: email,
-    timestamp: new Date().toISOString(),
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    model: state.selectedModel ? state.selectedModel.name : 'unknown',
-    promptTokens: state.promptTokens,
-    answerTokens: state.answerTokens,
-  };
   fetch(SHEETS_WEBHOOK, {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  }).catch(err => console.warn('[TokenCost] Sheets log failed:', err));
+    body: JSON.stringify({
+      email: email,
+      timestamp: new Date().toISOString(),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      model: state.selectedModel ? state.selectedModel.name : 'unknown',
+      promptTokens: state.promptTokens,
+      answerTokens: state.answerTokens,
+    }),
+  }).catch(function(e){ console.warn('Sheets log failed:', e); });
 }
 
-// ─── CALCULATE & RENDER ───────────────────────────────────────────────────────
+// ─── CALCULATE & SHOW RESULTS ─────────────────────────────────────────────────
 function calculateAndShow() {
   const model = state.selectedModel;
   if (!model) return;
 
-  // Re-read tokens in case chip was used
-  const promptTok  = state.promptTokens;
-  const answerTok  = state.answerTokens > 0 ? state.answerTokens
-    : Math.round(document.getElementById('calc-answer').value.length / 4);
+  const pTok = state.promptTokens;
+  const aTok = state.answerTokens;
 
-  const singleCost = costCalcDirect(promptTok, answerTok, model);
-  const dailyCost  = singleCost * 30;   // assume 30 uses/day as baseline
-  const monthlyCost = singleCost * 30 * 30;
-  const yearlyCost  = monthlyCost * 12;
+  const single  = costCalc(pTok, aTok, model);
+  const per100  = single * 100;
+  const per1000 = single * 1000;
 
-  document.getElementById('res-daily').textContent   = formatCost(singleCost);
-  document.getElementById('res-monthly').textContent = formatCost(singleCost * 100);
-  document.getElementById('res-yearly').textContent  = formatCost(singleCost * 1000);
-  document.getElementById('res-tokens-day').textContent = (promptTok + answerTok).toLocaleString();
+  document.getElementById('res-daily').textContent   = formatCost(single);
+  document.getElementById('res-monthly').textContent = formatCost(per100);
+  document.getElementById('res-yearly').textContent  = formatCost(per1000);
+  document.getElementById('res-tokens-day').textContent = (pTok + aTok).toLocaleString();
 
-  // Update labels to match what we're showing
   document.querySelector('#results-section .result-card:nth-child(1) .result-label').textContent = 'Per Exchange';
   document.querySelector('#results-section .result-card:nth-child(2) .result-label').textContent = '100 Exchanges';
   document.querySelector('#results-section .result-card:nth-child(3) .result-label').textContent = '1,000 Exchanges';
   document.querySelector('#results-section .result-card:nth-child(4) .result-label').textContent = 'Total Tokens';
 
   document.getElementById('results-model-note').textContent =
-    `Using ${model.name} · ${promptTok.toLocaleString()} input tokens + ${answerTok.toLocaleString()} output tokens per exchange. See all models below.`;
+    'Using ' + model.name + ' \u00b7 ' + pTok.toLocaleString() + ' input + ' + aTok.toLocaleString() + ' output tokens per exchange.';
 
-  // Build comparison table — sorted cheapest first
-  const tbody = document.getElementById('table-body');
-  const rows = MODELS.map(m => ({
-    ...m,
-    perExchange: costCalcDirect(promptTok, answerTok, m),
-    per100: costCalcDirect(promptTok, answerTok, m) * 100,
-  })).sort((a, b) => a.perExchange - b.perExchange);
+  const rows = MODELS.map(function(m) {
+    return { name: m.name, provider: m.provider,
+      per1: costCalc(pTok, aTok, m),
+      per100: costCalc(pTok, aTok, m) * 100 };
+  }).sort(function(a,b){ return a.per1 - b.per1; });
 
-  tbody.innerHTML = rows.map((m, i) => `
-    <tr class="${i === 0 ? 'best-value' : ''}">
-      <td><span class="model-name">${m.name}</span></td>
-      <td><span style="font-size:0.85rem;color:var(--muted);">${m.provider}</span></td>
-      <td class="cost-cell" style="color:${i === 0 ? 'var(--success)' : i === rows.length - 1 ? 'var(--danger)' : 'var(--text)'}">
-        ${formatCost(m.perExchange)}
-      </td>
-      <td class="cost-cell">${formatCost(m.per100)}</td>
-      <td>
-        ${i === 0 ? '<span class="best-tag">CHEAPEST</span>' : ''}
-        ${i === rows.length - 1 ? '<span class="pricey-tag">Most expensive</span>' : ''}
-      </td>
-    </tr>
-  `).join('');
+  document.getElementById('table-body').innerHTML = rows.map(function(m, i) {
+    const color = i === 0 ? 'var(--success)' : (i === rows.length-1 ? 'var(--danger)' : 'var(--text)');
+    const tag   = i === 0 ? '<span class="best-tag">CHEAPEST</span>'
+                : i === rows.length-1 ? '<span class="pricey-tag">Most expensive</span>' : '';
+    return '<tr class="' + (i===0?'best-value':'') + '">' +
+      '<td><span class="model-name">' + m.name + '</span></td>' +
+      '<td><span style="font-size:.85rem;color:var(--muted)">' + m.provider + '</span></td>' +
+      '<td class="cost-cell" style="color:' + color + '">' + formatCost(m.per1) + '</td>' +
+      '<td class="cost-cell">' + formatCost(m.per100) + '</td>' +
+      '<td>' + tag + '</td></tr>';
+  }).join('');
 
-  // Update table headers
-  document.querySelectorAll('.comparison-table th')[2].textContent = 'Per Exchange';
-  document.querySelectorAll('.comparison-table th')[3].textContent = '100 Exchanges';
+  const ths = document.querySelectorAll('.comparison-table th');
+  if (ths[2]) ths[2].textContent = 'Per Exchange';
+  if (ths[3]) ths[3].textContent = '100 Exchanges';
 
   document.getElementById('results-section').style.display = 'block';
 }
 
-function costCalcDirect(inputTok, outputTok, model) {
+function costCalc(inputTok, outputTok, model) {
   return (inputTok / 1e6) * model.input + (outputTok / 1e6) * model.output;
 }
 
 function formatCost(n) {
-  if (n < 0.0001) return '<$0.0001';
-  if (n < 0.01)   return '$' + n.toFixed(5);
-  if (n < 1)      return '$' + n.toFixed(4);
-  if (n < 100)    return '$' + n.toFixed(2);
-  if (n < 10000)  return '$' + Math.round(n).toLocaleString();
-  return '$' + (Math.round(n / 100) / 10).toFixed(1) + 'K';
+  if (n < 0.000001) return '<$0.000001';
+  if (n < 0.01)     return '$' + n.toFixed(5);
+  if (n < 1)        return '$' + n.toFixed(4);
+  if (n < 100)      return '$' + n.toFixed(2);
+  if (n < 10000)    return '$' + Math.round(n).toLocaleString();
+  return '$' + (Math.round(n/100)/10).toFixed(1) + 'K';
 }
 
 function fmtNum(n) {
-  if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
-  if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
-  if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+  if (n >= 1e6) return (n/1e6).toFixed(1)+'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1)+'K';
   return n.toLocaleString();
 }
 
 // ─── TOKEN COUNTER ────────────────────────────────────────────────────────────
 function countTokens() {
-  const text  = document.getElementById('token-input').value;
-  const chars = text.length;
-  const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+  const text   = document.getElementById('token-input').value;
+  const chars  = text.length;
+  const words  = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
   const tokens = Math.round(chars / 4);
-
   document.getElementById('cnt-tokens').textContent = tokens.toLocaleString();
   document.getElementById('cnt-words').textContent  = words.toLocaleString();
   document.getElementById('cnt-chars').textContent  = chars.toLocaleString();
-
-  // Cost as output tokens (higher, more conservative estimate)
-  const cheap   = (tokens / 1e6) * 3.00;
-  const mid     = (tokens / 1e6) * 10.00;
-  const premium = (tokens / 1e6) * 75.00;
-
-  document.getElementById('cnt-cost-cheap').textContent   = cheap   < 0.000001 ? '$0.00' : '$' + cheap.toFixed(6);
-  document.getElementById('cnt-cost-mid').textContent     = mid     < 0.000001 ? '$0.00' : '$' + mid.toFixed(6);
-  document.getElementById('cnt-cost-premium').textContent = premium < 0.000001 ? '$0.00' : '$' + premium.toFixed(6);
+  document.getElementById('cnt-cost-cheap').textContent   = '$' + ((tokens/1e6)*3).toFixed(6);
+  document.getElementById('cnt-cost-mid').textContent     = '$' + ((tokens/1e6)*10).toFixed(6);
+  document.getElementById('cnt-cost-premium').textContent = '$' + ((tokens/1e6)*75).toFixed(6);
 }
 
 const EXAMPLE_TEXTS = {
-  short: `Fix this React component: the button isn't triggering the onClick event on mobile. Here's the code:
-
-function SubmitBtn({ onClick }) {
-  return <button onClick={onClick}>Submit</button>;
-}
-
-I think it might be a touch event issue. How do I fix it?`,
-
-  medium: `You are an expert product manager. I need help writing a product requirements document (PRD) for a new feature: an AI-powered email summarizer that reads a user's inbox and generates a daily digest.
-
-The feature must:
-1. Connect to Gmail and Outlook via OAuth
-2. Categorize emails into: urgent, FYI, newsletters, and spam
-3. Generate a 3-sentence summary per category
-4. Send the digest at a user-defined time each morning
-5. Allow the user to reply to emails directly from the digest
-
-Please structure the PRD with sections for: Overview, Problem Statement, Goals, Non-Goals, User Stories, Technical Requirements, and Success Metrics.`,
-
-  long: `EXECUTIVE SUMMARY
-Your Q1 2026 digital marketing campaign generated $2.4M in attributed revenue across all channels, representing a 34% year-over-year improvement. Total spend was $380,000, yielding a blended ROAS of 6.3x. The standout performer was LinkedIn B2B advertising, which drove 42% of qualified pipeline at a CPL of $187 — well below the $250 benchmark. Google Search remained your highest-volume channel but saw margin compression due to increased competitor bidding on branded terms.
-
-EMAIL MARKETING
-Your email list of 84,000 subscribers generated 1.2M sends during Q1 with an average open rate of 28.4%, above the industry average of 21.3%. Click-through rates averaged 3.8%. Your nurture sequence for trial signups achieved a 22% conversion to paid plan within 30 days, up from 18% in Q4 2025.
-
-PAID SOCIAL
-Facebook and Instagram combined delivered 18M impressions and 94,000 clicks at an average CPC of $1.82. Retargeting audiences significantly outperformed cold audiences: retargeting ROAS was 11.2x vs. 3.1x for cold. Video ads with a 6-second hook outperformed static images by 67% on engagement rate.
-
-SEO & ORGANIC
-Organic search delivered 124,000 sessions in Q1, up 18% QoQ. Your top 5 landing pages account for 61% of organic traffic. Domain authority increased from 42 to 47. Three target keywords moved into position 1–3: "ai email assistant" (1.2M monthly searches), "email summarizer tool" (320K), and "inbox zero app" (87K).
-
-RECOMMENDATIONS
-1. Increase LinkedIn spend by 40% — it is your most efficient pipeline channel.
-2. Launch a retargeting campaign on Meta for trial signups who did not convert within 7 days.
-3. Build two new SEO content hubs targeting "email automation" and "inbox management" to capture adjacent traffic.
-4. Test a 5-day email nurture sequence against your current 14-day sequence.`
+  short:  'Fix this React component: the button is not triggering onClick on mobile.\n\nfunction SubmitBtn({ onClick }) {\n  return <button onClick={onClick}>Submit</button>;\n}\n\nHow do I fix it?',
+  medium: 'You are an expert product manager. Write a product requirements document for an AI-powered email summarizer that:\n1. Connects to Gmail and Outlook via OAuth\n2. Categorizes emails into: urgent, FYI, newsletters, spam\n3. Generates a 3-sentence summary per category\n4. Sends a daily digest at a user-defined time\n\nInclude: Overview, Problem Statement, Goals, User Stories, Technical Requirements, Success Metrics.',
+  long:   'EXECUTIVE SUMMARY\nQ1 2026 digital marketing generated $2.4M revenue, up 34% YoY. Spend was $380K, ROAS 6.3x. LinkedIn drove 42% of pipeline at $187 CPL.\n\nEMAIL MARKETING\n84,000 subscribers, 1.2M sends, 28.4% open rate (vs 21.3% industry avg), 3.8% CTR. Trial-to-paid conversion hit 22%.\n\nPAID SOCIAL\n18M impressions, 94K clicks, $1.82 CPC. Retargeting ROAS: 11.2x vs 3.1x cold. Video ads outperformed static by 67%.\n\nSEO\n124K organic sessions, up 18% QoQ. DA grew from 42 to 47. Three keywords hit position 1-3.\n\nRECOMMENDATIONS\n1. Increase LinkedIn spend 40%.\n2. Retarget unconverted trials.\n3. Build two new content hubs.\n4. Test 5-day vs 14-day nurture sequence.'
 };
 
 function loadExample(key) {
@@ -762,21 +1145,18 @@ function clearCounter() {
   countTokens();
 }
 
-// ─── NAVIGATION ───────────────────────────────────────────────────────────────
 function toggleNav() {
   document.querySelector('.nav-links').classList.toggle('open');
 }
 
-// ─── TOAST ────────────────────────────────────────────────────────────────────
-function showToast(msg, type = 'success') {
+function showToast(msg, type) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = `toast ${type} show`;
-  setTimeout(() => { t.className = 'toast'; }, 3500);
+  t.className = 'toast ' + (type||'success') + ' show';
+  setTimeout(function(){ t.className = 'toast'; }, 3500);
 }
 
-// ─── KEYBOARD: close modal on Escape ─────────────────────────────────────────
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
 });
 </script>
