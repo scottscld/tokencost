@@ -10,15 +10,14 @@
 <meta property="og:description" content="Free calculator to compare AI model token costs across all major providers. Built for vibe coders and developers.">
 <meta property="og:type" content="website">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://yourdomain.github.io/">
+<link rel="canonical" href="https://www.vibecodecalculators.com/">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Google AdSense — STEP 1: Replace ca-pub-XXXXXXXXXXXXXXXX with your Publisher ID -->
-<!-- STEP 2: Uncomment the line below once your site is approved -->
+<!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3450655454481883" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="css/style.css">
@@ -136,8 +135,16 @@
 
   <!-- AdSense Slot 1 — Leaderboard -->
   <div class="ad-slot" id="ad-slot-1">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3450655454481883"
-     crossorigin="anonymous"></script>
+    <!-- Replace this comment with your AdSense ad unit code -->
+    <!-- Example:
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script src="js/models.js"></script>
+    -->
     <span>Advertisement</span>
   </div>
 </section>
@@ -145,125 +152,103 @@
 <!-- CALCULATOR -->
 <section id="calculator">
   <span class="section-label">Cost Calculator</span>
-  <h2>WHAT WILL YOUR AI COST?</h2>
-  <p class="section-desc">Answer 3 simple questions about what you want to build. We'll handle the math and show you a full breakdown across every major AI tool.</p>
+  <h2>CALCULATE YOUR AI COST</h2>
+  <p class="section-desc">Pick a model, type your question, tell us how long you want the answer — we'll show you the exact cost.</p>
 
   <div class="calc-wrapper">
-    <div class="calc-body">
 
-      <!-- Q1: Use Case -->
-      <div class="question-block">
-        <div class="q-num">01</div>
-        <div class="q-content">
-          <div class="q-title">What are you building or using AI for?</div>
-          <div class="q-hint">Pick the option that sounds most like your project</div>
-          <div class="use-case-grid" id="use-case-grid">
-            <button class="use-case-btn active" data-preset="chatbot" onclick="selectUseCase(this)">
-              <span class="uc-icon">💬</span>
-              <span class="uc-label">Chatbot or Q&amp;A</span>
-              <span class="uc-desc">Answer questions, customer support</span>
-            </button>
-            <button class="use-case-btn" data-preset="coding" onclick="selectUseCase(this)">
-              <span class="uc-icon">💻</span>
-              <span class="uc-label">Coding Assistant</span>
-              <span class="uc-desc">Write, review, or fix code</span>
-            </button>
-            <button class="use-case-btn" data-preset="content" onclick="selectUseCase(this)">
-              <span class="uc-icon">✍️</span>
-              <span class="uc-label">Writing &amp; Content</span>
-              <span class="uc-desc">Emails, blogs, social posts</span>
-            </button>
-            <button class="use-case-btn" data-preset="rag" onclick="selectUseCase(this)">
-              <span class="uc-icon">📄</span>
-              <span class="uc-label">Document Analysis</span>
-              <span class="uc-desc">Summarize or search documents</span>
-            </button>
-            <button class="use-case-btn" data-preset="agent" onclick="selectUseCase(this)">
-              <span class="uc-icon">🤖</span>
-              <span class="uc-label">AI Agent / Automation</span>
-              <span class="uc-desc">Multi-step tasks, workflows</span>
-            </button>
-            <button class="use-case-btn" data-preset="image" onclick="selectUseCase(this)">
-              <span class="uc-icon">🎨</span>
-              <span class="uc-label">Just Exploring</span>
-              <span class="uc-desc">Testing AI, learning the ropes</span>
-            </button>
-          </div>
-        </div>
+    <!-- Step 1: Model -->
+    <div class="calc-step">
+      <div class="calc-step-label">1. Select AI Model</div>
+      <div class="calc-select-wrap">
+        <select id="calc-model" onchange="onCalcChange()">
+          <option value="" disabled selected>Choose an AI model</option>
+          <optgroup label="── Budget (Cheapest)">
+            <option value="Mistral Small">Mistral Small — OpenSource / Budget</option>
+            <option value="GPT-4o Mini">GPT-4o Mini — OpenAI</option>
+            <option value="Gemini 2.5 Flash">Gemini 2.5 Flash — Google</option>
+            <option value="Grok 4.1">Grok 4.1 — xAI</option>
+            <option value="Llama 4 (API)">Llama 4 — Meta (via API)</option>
+            <option value="DeepSeek V3.2">DeepSeek V3.2 — DeepSeek</option>
+          </optgroup>
+          <optgroup label="── Mid-Tier (Best Value)">
+            <option value="DeepSeek R1">DeepSeek R1 — DeepSeek</option>
+            <option value="o4-mini">o4-mini — OpenAI</option>
+            <option value="Gemini 2.5 Pro">Gemini 2.5 Pro — Google</option>
+            <option value="Claude Haiku 4.5">Claude Haiku 4.5 — Anthropic</option>
+            <option value="Mistral Large">Mistral Large — Mistral</option>
+            <option value="GPT-4o">GPT-4o — OpenAI</option>
+            <option value="Gemini 3 Flash">Gemini 3 Flash — Google</option>
+            <option value="Grok 3">Grok 3 — xAI</option>
+          </optgroup>
+          <optgroup label="── Premium (Most Capable)">
+            <option value="Gemini 3.1 Pro">Gemini 3.1 Pro — Google</option>
+            <option value="GPT-5.4">GPT-5.4 — OpenAI</option>
+            <option value="Claude Sonnet 4.6">Claude Sonnet 4.6 — Anthropic</option>
+            <option value="Claude Opus 4.6">Claude Opus 4.6 — Anthropic</option>
+          </optgroup>
+        </select>
       </div>
-
-      <!-- Q2: How often -->
-      <div class="question-block">
-        <div class="q-num">02</div>
-        <div class="q-content">
-          <div class="q-title">How often will this be used per day?</div>
-          <div class="q-hint">Roughly how many times will someone send a message or request to your AI</div>
-          <div class="freq-grid">
-            <button class="freq-btn active" data-requests="10" onclick="selectFreq(this)">
-              <span class="freq-label">Just Me</span>
-              <span class="freq-num">~10/day</span>
-              <span class="freq-desc">Personal use</span>
-            </button>
-            <button class="freq-btn" data-requests="100" onclick="selectFreq(this)">
-              <span class="freq-label">Small Team</span>
-              <span class="freq-num">~100/day</span>
-              <span class="freq-desc">5–20 people</span>
-            </button>
-            <button class="freq-btn" data-requests="1000" onclick="selectFreq(this)">
-              <span class="freq-label">Growing App</span>
-              <span class="freq-num">~1,000/day</span>
-              <span class="freq-desc">Active users</span>
-            </button>
-            <button class="freq-btn" data-requests="10000" onclick="selectFreq(this)">
-              <span class="freq-label">Scaling Up</span>
-              <span class="freq-num">~10,000/day</span>
-              <span class="freq-desc">Lots of traffic</span>
-            </button>
-            <button class="freq-btn" data-requests="100000" onclick="selectFreq(this)">
-              <span class="freq-label">At Scale</span>
-              <span class="freq-num">~100,000/day</span>
-              <span class="freq-desc">High volume</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Q3: Response length -->
-      <div class="question-block">
-        <div class="q-num">03</div>
-        <div class="q-content">
-          <div class="q-title">How long are the AI's responses, typically?</div>
-          <div class="q-hint">Think about what you're asking the AI to produce each time</div>
-          <div class="length-grid">
-            <button class="length-btn active" data-output="100" onclick="selectLength(this)">
-              <span class="len-label">Short</span>
-              <span class="len-example">A few sentences — answering a question, classifying text, yes/no</span>
-            </button>
-            <button class="length-btn" data-output="400" onclick="selectLength(this)">
-              <span class="len-label">Medium</span>
-              <span class="len-example">A paragraph or two — emails, summaries, short explanations</span>
-            </button>
-            <button class="length-btn" data-output="1200" onclick="selectLength(this)">
-              <span class="len-label">Long</span>
-              <span class="len-example">A full page — blog posts, detailed reports, code functions</span>
-            </button>
-            <button class="length-btn" data-output="4000" onclick="selectLength(this)">
-              <span class="len-label">Very Long</span>
-              <span class="len-example">Multiple pages — full code files, entire documents, deep research</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="calc-cta">
-        <button class="btn-primary btn-large" onclick="showEmailModal()">
-          Show My Cost Breakdown →
-        </button>
-        <p class="calc-cta-note">Free. No credit card. Takes 5 seconds.</p>
-      </div>
-
+      <!-- Model pricing badge — shown after selection -->
+      <div class="model-price-badge" id="model-price-badge" style="display:none;"></div>
     </div>
+
+    <!-- Step 2: Your prompt -->
+    <div class="calc-step">
+      <div class="calc-step-label">2. Your Question / Prompt</div>
+      <div class="calc-step-hint">Paste your actual question, or just describe roughly how long it is</div>
+      <textarea id="calc-prompt" rows="4"
+        placeholder="Paste your question here, or just type a description like: 'About 3 paragraphs explaining what I want the AI to do...'"
+        oninput="onCalcChange()"></textarea>
+      <div class="calc-prompt-stats" id="calc-prompt-stats">
+        <span id="prompt-token-count">0 tokens</span>
+        <span class="calc-stat-sep">·</span>
+        <span id="prompt-word-count">0 words</span>
+      </div>
+    </div>
+
+    <!-- Step 3: Expected answer length -->
+    <div class="calc-step">
+      <div class="calc-step-label">3. AI's Answer — How long do you expect it to be?</div>
+      <div class="calc-step-hint">Think about what you're asking for. Not sure? Use the quick estimate buttons below.</div>
+      <textarea id="calc-answer" rows="3"
+        placeholder="Optionally paste a sample AI response here to get an exact count — or just use the buttons below to estimate..."
+        oninput="onCalcChange()"></textarea>
+      <!-- Quick estimate chips -->
+      <div class="answer-chips">
+        <span class="chip-label">Quick estimate:</span>
+        <button class="answer-chip" data-tokens="20" onclick="setAnswerChip(this)">
+          Short Answer <span class="chip-tok">~20 tokens</span>
+          <span class="chip-eg">A sentence or two</span>
+        </button>
+        <button class="answer-chip" data-tokens="75" onclick="setAnswerChip(this)">
+          Medium Answer <span class="chip-tok">~75 tokens</span>
+          <span class="chip-eg">A short paragraph</span>
+        </button>
+        <button class="answer-chip" data-tokens="200" onclick="setAnswerChip(this)">
+          Long Answer <span class="chip-tok">~200 tokens</span>
+          <span class="chip-eg">Several paragraphs</span>
+        </button>
+        <button class="answer-chip" data-tokens="800" onclick="setAnswerChip(this)">
+          Very Long <span class="chip-tok">~800 tokens</span>
+          <span class="chip-eg">Full page / code</span>
+        </button>
+      </div>
+      <div class="calc-prompt-stats" id="calc-answer-stats">
+        <span id="answer-token-count">0 tokens</span>
+        <span class="calc-stat-sep">·</span>
+        <span id="answer-word-count">0 words</span>
+      </div>
+    </div>
+
+    <!-- Calculate button -->
+    <div class="calc-cta">
+      <button class="btn-primary btn-large" id="calc-btn" onclick="showEmailModal()" disabled>
+        Calculate Total Cost →
+      </button>
+      <p class="calc-cta-note" id="calc-cta-note">Select a model above to get started</p>
+    </div>
+
   </div>
 </section>
 
@@ -482,7 +467,308 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script src="js/models.js"></script>
 <script src="js/app.js"></script>
+<script>// app.js — TokenCost.ai main application logic
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+const state = {
+  selectedModel: null,
+  promptTokens: 0,
+  answerTokens: 0,
+  emailSubmitted: false,
+};
+
+// Google Sheets webhook
+const SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyRYucODMQokSM2J-wPMwIi6Y9QBbaeFRDSGBnDKtvt3rltgfLOGCjETMgMM0ko6C9SyA/exec';
+
+// ─── CALCULATOR INTERACTION ───────────────────────────────────────────────────
+function onCalcChange() {
+  const modelName = document.getElementById('calc-model').value;
+  const promptText = document.getElementById('calc-prompt').value;
+  const answerText = document.getElementById('calc-answer').value;
+
+  // Token counts
+  state.promptTokens = Math.round(promptText.length / 4);
+  state.answerTokens = Math.round(answerText.length / 4);
+
+  // Update token displays
+  const pWords = promptText.trim() ? promptText.trim().split(/\s+/).length : 0;
+  const aWords = answerText.trim() ? answerText.trim().split(/\s+/).length : 0;
+  document.getElementById('prompt-token-count').textContent = state.promptTokens.toLocaleString() + ' tokens';
+  document.getElementById('prompt-word-count').textContent  = pWords.toLocaleString() + ' words';
+  document.getElementById('answer-token-count').textContent = state.answerTokens.toLocaleString() + ' tokens';
+  document.getElementById('answer-word-count').textContent  = aWords.toLocaleString() + ' words';
+
+  // Model price badge
+  if (modelName) {
+    state.selectedModel = MODELS.find(m => m.name === modelName);
+    if (state.selectedModel) {
+      const badge = document.getElementById('model-price-badge');
+      badge.style.display = 'inline-flex';
+      badge.innerHTML = `
+        <div class="mpb-item"><span class="mpb-val">$${state.selectedModel.input.toFixed(2)}</span><span class="mpb-lbl">per 1M input tokens</span></div>
+        <span class="mpb-sep">|</span>
+        <div class="mpb-item"><span class="mpb-val">$${state.selectedModel.output.toFixed(2)}</span><span class="mpb-lbl">per 1M output tokens</span></div>
+      `;
+    }
+  }
+
+  // Enable/disable calculate button
+  const btn = document.getElementById('calc-btn');
+  const note = document.getElementById('calc-cta-note');
+  const ready = modelName && (state.promptTokens > 0 || state.answerTokens > 0);
+  btn.disabled = !ready;
+  if (!modelName) {
+    note.textContent = 'Select a model above to get started';
+  } else if (state.promptTokens === 0 && state.answerTokens === 0) {
+    note.textContent = 'Enter your question or pick an answer length above';
+  } else {
+    const singleCost = costCalcDirect(state.promptTokens, state.answerTokens, state.selectedModel);
+    note.textContent = `This single exchange ≈ ${formatCost(singleCost)} · Free. No credit card.`;
+  }
+}
+
+function setAnswerChip(btn) {
+  // Toggle active
+  document.querySelectorAll('.answer-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  state.answerTokens = parseInt(btn.dataset.tokens);
+
+  // Clear the textarea and update display
+  document.getElementById('calc-answer').value = '';
+  document.getElementById('answer-token-count').textContent = state.answerTokens.toLocaleString() + ' tokens';
+  document.getElementById('answer-word-count').textContent  = Math.round(state.answerTokens * 0.75).toLocaleString() + ' words (est.)';
+
+  onCalcChange();
+}
+
+// ─── EMAIL MODAL ──────────────────────────────────────────────────────────────
+function showEmailModal() {
+  if (state.emailSubmitted) {
+    calculateAndShow();
+    document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  document.getElementById('email-modal').classList.add('open');
+  setTimeout(() => document.getElementById('modal-email').focus(), 100);
+}
+
+function closeModal() {
+  document.getElementById('email-modal').classList.remove('open');
+  document.getElementById('modal-error').style.display = 'none';
+  document.getElementById('modal-email').classList.remove('invalid');
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('email-modal')) closeModal();
+}
+
+function submitModalEmail() {
+  const emailInput = document.getElementById('modal-email');
+  const email = emailInput.value.trim();
+  const errEl = document.getElementById('modal-error');
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.style.display = 'block';
+    emailInput.classList.add('invalid');
+    emailInput.focus();
+    return;
+  }
+
+  errEl.style.display = 'none';
+  emailInput.classList.remove('invalid');
+  logToSheets(email);
+  state.emailSubmitted = true;
+  closeModal();
+  calculateAndShow();
+  setTimeout(() => document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' }), 150);
+  showToast('Results unlocked! Scroll down to see your breakdown.', 'success');
+}
+
+// ─── GOOGLE SHEETS LOGGING ────────────────────────────────────────────────────
+function logToSheets(email) {
+  const payload = {
+    email: email,
+    timestamp: new Date().toISOString(),
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    model: state.selectedModel ? state.selectedModel.name : 'unknown',
+    promptTokens: state.promptTokens,
+    answerTokens: state.answerTokens,
+  };
+  fetch(SHEETS_WEBHOOK, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  }).catch(err => console.warn('[TokenCost] Sheets log failed:', err));
+}
+
+// ─── CALCULATE & RENDER ───────────────────────────────────────────────────────
+function calculateAndShow() {
+  const model = state.selectedModel;
+  if (!model) return;
+
+  // Re-read tokens in case chip was used
+  const promptTok  = state.promptTokens;
+  const answerTok  = state.answerTokens > 0 ? state.answerTokens
+    : Math.round(document.getElementById('calc-answer').value.length / 4);
+
+  const singleCost = costCalcDirect(promptTok, answerTok, model);
+  const dailyCost  = singleCost * 30;   // assume 30 uses/day as baseline
+  const monthlyCost = singleCost * 30 * 30;
+  const yearlyCost  = monthlyCost * 12;
+
+  document.getElementById('res-daily').textContent   = formatCost(singleCost);
+  document.getElementById('res-monthly').textContent = formatCost(singleCost * 100);
+  document.getElementById('res-yearly').textContent  = formatCost(singleCost * 1000);
+  document.getElementById('res-tokens-day').textContent = (promptTok + answerTok).toLocaleString();
+
+  // Update labels to match what we're showing
+  document.querySelector('#results-section .result-card:nth-child(1) .result-label').textContent = 'Per Exchange';
+  document.querySelector('#results-section .result-card:nth-child(2) .result-label').textContent = '100 Exchanges';
+  document.querySelector('#results-section .result-card:nth-child(3) .result-label').textContent = '1,000 Exchanges';
+  document.querySelector('#results-section .result-card:nth-child(4) .result-label').textContent = 'Total Tokens';
+
+  document.getElementById('results-model-note').textContent =
+    `Using ${model.name} · ${promptTok.toLocaleString()} input tokens + ${answerTok.toLocaleString()} output tokens per exchange. See all models below.`;
+
+  // Build comparison table — sorted cheapest first
+  const tbody = document.getElementById('table-body');
+  const rows = MODELS.map(m => ({
+    ...m,
+    perExchange: costCalcDirect(promptTok, answerTok, m),
+    per100: costCalcDirect(promptTok, answerTok, m) * 100,
+  })).sort((a, b) => a.perExchange - b.perExchange);
+
+  tbody.innerHTML = rows.map((m, i) => `
+    <tr class="${i === 0 ? 'best-value' : ''}">
+      <td><span class="model-name">${m.name}</span></td>
+      <td><span style="font-size:0.85rem;color:var(--muted);">${m.provider}</span></td>
+      <td class="cost-cell" style="color:${i === 0 ? 'var(--success)' : i === rows.length - 1 ? 'var(--danger)' : 'var(--text)'}">
+        ${formatCost(m.perExchange)}
+      </td>
+      <td class="cost-cell">${formatCost(m.per100)}</td>
+      <td>
+        ${i === 0 ? '<span class="best-tag">CHEAPEST</span>' : ''}
+        ${i === rows.length - 1 ? '<span class="pricey-tag">Most expensive</span>' : ''}
+      </td>
+    </tr>
+  `).join('');
+
+  // Update table headers
+  document.querySelectorAll('.comparison-table th')[2].textContent = 'Per Exchange';
+  document.querySelectorAll('.comparison-table th')[3].textContent = '100 Exchanges';
+
+  document.getElementById('results-section').style.display = 'block';
+}
+
+function costCalcDirect(inputTok, outputTok, model) {
+  return (inputTok / 1e6) * model.input + (outputTok / 1e6) * model.output;
+}
+
+function formatCost(n) {
+  if (n < 0.0001) return '<$0.0001';
+  if (n < 0.01)   return '$' + n.toFixed(5);
+  if (n < 1)      return '$' + n.toFixed(4);
+  if (n < 100)    return '$' + n.toFixed(2);
+  if (n < 10000)  return '$' + Math.round(n).toLocaleString();
+  return '$' + (Math.round(n / 100) / 10).toFixed(1) + 'K';
+}
+
+function fmtNum(n) {
+  if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+  return n.toLocaleString();
+}
+
+// ─── TOKEN COUNTER ────────────────────────────────────────────────────────────
+function countTokens() {
+  const text  = document.getElementById('token-input').value;
+  const chars = text.length;
+  const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+  const tokens = Math.round(chars / 4);
+
+  document.getElementById('cnt-tokens').textContent = tokens.toLocaleString();
+  document.getElementById('cnt-words').textContent  = words.toLocaleString();
+  document.getElementById('cnt-chars').textContent  = chars.toLocaleString();
+
+  // Cost as output tokens (higher, more conservative estimate)
+  const cheap   = (tokens / 1e6) * 3.00;
+  const mid     = (tokens / 1e6) * 10.00;
+  const premium = (tokens / 1e6) * 75.00;
+
+  document.getElementById('cnt-cost-cheap').textContent   = cheap   < 0.000001 ? '$0.00' : '$' + cheap.toFixed(6);
+  document.getElementById('cnt-cost-mid').textContent     = mid     < 0.000001 ? '$0.00' : '$' + mid.toFixed(6);
+  document.getElementById('cnt-cost-premium').textContent = premium < 0.000001 ? '$0.00' : '$' + premium.toFixed(6);
+}
+
+const EXAMPLE_TEXTS = {
+  short: `Fix this React component: the button isn't triggering the onClick event on mobile. Here's the code:
+
+function SubmitBtn({ onClick }) {
+  return <button onClick={onClick}>Submit</button>;
+}
+
+I think it might be a touch event issue. How do I fix it?`,
+
+  medium: `You are an expert product manager. I need help writing a product requirements document (PRD) for a new feature: an AI-powered email summarizer that reads a user's inbox and generates a daily digest.
+
+The feature must:
+1. Connect to Gmail and Outlook via OAuth
+2. Categorize emails into: urgent, FYI, newsletters, and spam
+3. Generate a 3-sentence summary per category
+4. Send the digest at a user-defined time each morning
+5. Allow the user to reply to emails directly from the digest
+
+Please structure the PRD with sections for: Overview, Problem Statement, Goals, Non-Goals, User Stories, Technical Requirements, and Success Metrics.`,
+
+  long: `EXECUTIVE SUMMARY
+Your Q1 2026 digital marketing campaign generated $2.4M in attributed revenue across all channels, representing a 34% year-over-year improvement. Total spend was $380,000, yielding a blended ROAS of 6.3x. The standout performer was LinkedIn B2B advertising, which drove 42% of qualified pipeline at a CPL of $187 — well below the $250 benchmark. Google Search remained your highest-volume channel but saw margin compression due to increased competitor bidding on branded terms.
+
+EMAIL MARKETING
+Your email list of 84,000 subscribers generated 1.2M sends during Q1 with an average open rate of 28.4%, above the industry average of 21.3%. Click-through rates averaged 3.8%. Your nurture sequence for trial signups achieved a 22% conversion to paid plan within 30 days, up from 18% in Q4 2025.
+
+PAID SOCIAL
+Facebook and Instagram combined delivered 18M impressions and 94,000 clicks at an average CPC of $1.82. Retargeting audiences significantly outperformed cold audiences: retargeting ROAS was 11.2x vs. 3.1x for cold. Video ads with a 6-second hook outperformed static images by 67% on engagement rate.
+
+SEO & ORGANIC
+Organic search delivered 124,000 sessions in Q1, up 18% QoQ. Your top 5 landing pages account for 61% of organic traffic. Domain authority increased from 42 to 47. Three target keywords moved into position 1–3: "ai email assistant" (1.2M monthly searches), "email summarizer tool" (320K), and "inbox zero app" (87K).
+
+RECOMMENDATIONS
+1. Increase LinkedIn spend by 40% — it is your most efficient pipeline channel.
+2. Launch a retargeting campaign on Meta for trial signups who did not convert within 7 days.
+3. Build two new SEO content hubs targeting "email automation" and "inbox management" to capture adjacent traffic.
+4. Test a 5-day email nurture sequence against your current 14-day sequence.`
+};
+
+function loadExample(key) {
+  document.getElementById('token-input').value = EXAMPLE_TEXTS[key] || '';
+  countTokens();
+}
+
+function clearCounter() {
+  document.getElementById('token-input').value = '';
+  countTokens();
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function toggleNav() {
+  document.querySelector('.nav-links').classList.toggle('open');
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => { t.className = 'toast'; }, 3500);
+}
+
+// ─── KEYBOARD: close modal on Escape ─────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 </body>
 </html>
