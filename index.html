@@ -3,14 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TokenCost.ai — AI Token Cost Calculator | Compare GPT, Claude, Gemini & More</title>
-<meta name="description" content="Free AI token cost calculator. Compare pricing across GPT-4o, Claude, Gemini, DeepSeek, Grok and 15+ models. Find out exactly what your AI project will cost before you build.">
-<meta name="keywords" content="AI token cost calculator, LLM pricing, GPT-4o cost, Claude pricing, Gemini token price, AI API cost, vibe coding cost, AI development budget">
-<meta property="og:title" content="TokenCost.ai — Know What Your AI Will Cost">
-<meta property="og:description" content="Free calculator to compare AI model token costs across all major providers. Built for vibe coders and developers.">
+
+<!-- ═══ PRIMARY SEO ═══ -->
+<title>AI Token Cost Calculator — Compare GPT-4o, Claude, Gemini Pricing | VibeCodeCalculators</title>
+<meta name="description" content="Free AI token cost calculator. Instantly compare GPT-4o, Claude, Gemini, DeepSeek, Grok and 15+ model prices. Know exactly what your AI app will cost before you build. No signup needed.">
+<meta name="keywords" content="AI token cost calculator, LLM pricing calculator, GPT-4o price, Claude token cost, Gemini pricing, AI API cost estimator, vibe coding tools, how much does AI cost, ChatGPT API pricing, AI token price comparison, DeepSeek pricing, AI development cost, tokens per dollar, LLM cost comparison 2026">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="VibeCodeCalculators.com">
+<link rel="canonical" href="https://vibecodecalculators.com/">
+
+<!-- ═══ OPEN GRAPH (Facebook, LinkedIn previews) ═══ -->
 <meta property="og:type" content="website">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.vibecodecalculators.com/">
+<meta property="og:url" content="https://vibecodecalculators.com/">
+<meta property="og:title" content="AI Token Cost Calculator — Know What Your AI Will Cost">
+<meta property="og:description" content="Compare AI token prices across GPT-4o, Claude, Gemini and 15+ models. Free calculator for vibe coders and developers. See costs per exchange, per 100 uses, and per 1,000 uses.">
+<meta property="og:site_name" content="VibeCodeCalculators">
+
+<!-- ═══ TWITTER / X CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Token Cost Calculator — Compare GPT, Claude, Gemini & More">
+<meta name="twitter:description" content="Free tool: compare AI token costs across 15+ models. Know what your AI app will cost before you build it.">
+<meta name="twitter:site" content="@vibecodecalc">
+
+<!-- ═══ JSON-LD STRUCTURED DATA (helps Google understand the page) ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Token Cost Calculator",
+  "url": "https://vibecodecalculators.com/",
+  "description": "Free AI token cost calculator. Compare GPT-4o, Claude, Gemini, DeepSeek, Grok and 15+ AI model prices instantly. Built for vibe coders and developers.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "VibeCodeCalculators",
+    "url": "https://vibecodecalculators.com/"
+  },
+  "keywords": "AI token calculator, LLM pricing, GPT-4o cost, Claude pricing, Gemini token price"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does GPT-4o cost per token?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPT-4o costs $2.50 per million input tokens and $10.00 per million output tokens as of 2026."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an AI token?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A token is roughly three-quarters of a word, or about 4 characters. Most AI models charge separately for input tokens (your prompt) and output tokens (the AI's response)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI model is the cheapest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of 2026, the cheapest AI models for API use are Mistral Small ($0.10/1M input), GPT-4o Mini ($0.15/1M input), and Gemini 2.5 Flash ($0.15/1M input). Use our calculator to compare total costs for your specific use case."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does Claude cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude pricing varies by model: Claude Haiku 4.5 costs $0.80 per million input tokens, Claude Sonnet 4.6 costs $3.00 per million input tokens, and Claude Opus 4.6 costs $15.00 per million input tokens."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I reduce my AI API costs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Top ways to reduce AI costs: use a cheaper model for simple tasks, keep your system prompt short, set a max output token limit, enable prompt caching, and use batch processing for non-urgent tasks. These can reduce costs by 50-90%."
+      }
+    }
+  ]
+}
+</script>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,9 +103,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3450655454481883"
-     crossorigin="anonymous"></script>
-  
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3450655454481883" crossorigin="anonymous"></script>
+
 <style>/* ─── VARIABLES ─── */
 :root {
   --bg: #080808;
